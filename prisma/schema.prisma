@@ -8,8 +8,10 @@ datasource db {
 }
 
 model users {
-  id       Int    @id @default(autoincrement()) @db.UnsignedInt
-  nickname String @db.VarChar(100)
-  email    String @unique(map: "email") @db.VarChar(100)
-  password String @db.VarChar(100)
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt
+  nickname   String   @db.VarChar(100)
+  email      String   @unique(map: "email") @db.VarChar(100)
+  password   String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  updated_at DateTime @default(now()) @db.DateTime(0)
 }

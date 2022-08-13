@@ -5,7 +5,12 @@ import bcrypt from 'bcrypt'
 const auth = Router()
 const prisma = new PrismaClient()
 
-auth.post('/signin', async (req, res) => {
+auth.get('/signin', (req, res: any) => {
+  console.log('session', req.session)
+  res.json('get signin')
+})
+
+auth.post('/signin', async (req: any, res) => {
   const user = await prisma.users.findUnique({
     where: {
       email: req.body.email,
@@ -20,6 +25,13 @@ auth.post('/signin', async (req, res) => {
       })
     })
     if (isValid) {
+      req.session.regenerate((err: any) => {
+        console.log(err)
+      })
+
+      req.session.userId = user.id
+      req.session.email = user.email
+
       res.json({ isSuccess: isValid, message: 'success' })
     } else {
       res.json({ isSuccess: isValid, message: 'error' })
@@ -29,4 +41,10 @@ auth.post('/signin', async (req, res) => {
   }
 })
 
+auth.post('/signout', (req, res) => {
+  req.session.destroy((err) => {
+    console.log('err:', err)
+  })
+  res.json('signout')
+})
 export default auth

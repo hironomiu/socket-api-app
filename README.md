@@ -23,11 +23,15 @@ create database socket;
 ```
 
 ```
+drop table users;
+
 create table users(
   id int unsigned not null auto_increment,
   nickname varchar(100) not null,
   email varchar(100) not null,
   password varchar(100) not null,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   primary key (id),
   unique key(email)
 );
@@ -49,8 +53,8 @@ npx prisma generate
 ## Install Memo
 
 ```
-npm install -y express cors pug mysql2 socket.io @prisma/client dotenv bcrypt
-npm install -D typescript @types/node ts-node @types/express types/mysql2# @types/cors @types/pug nodemon @types/bcrypt
+npm install -y express cors pug mysql2 socket.io @prisma/client dotenv bcrypt express-session cookie-parser
+npm install -D typescript @types/node ts-node @types/express types/mysql2# @types/cors @types/pug nodemon @types/bcrypt @types/express-session @types/cookie-parser
 npx tsc --init
 mkdir src
 mkdir src/api
