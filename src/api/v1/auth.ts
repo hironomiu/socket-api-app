@@ -45,6 +45,7 @@ auth.post('/signout', (req, res) => {
   req.session.destroy((err) => {
     console.log('err:', err)
   })
-  res.json('signout')
+  res.clearCookie('session')
+  res.json({ issuccess: true, message: 'signouted' })
 })
 export default auth
