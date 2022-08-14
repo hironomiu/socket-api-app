@@ -5,9 +5,13 @@ import bcrypt from 'bcrypt'
 const auth = Router()
 const prisma = new PrismaClient()
 
-auth.get('/signin', (req, res: any) => {
+auth.get('/signin', (req: any, res: any) => {
   console.log('session', req.session)
-  res.json('get signin')
+  if (req.session.userId) {
+    res.json({ isSignIned: true, message: 'signined' })
+  } else {
+    res.json({ isSignIned: false, message: 'error' })
+  }
 })
 
 auth.post('/signin', async (req: any, res) => {
