@@ -16,3 +16,16 @@ export const fetchSignInPost = async (user: User) => {
   const json = await response.json()
   return json
 }
+
+export const fetchSignInGet = async () => {
+  const response = await fetch('http://localhost:5252/api/v1/auth/signin', {
+    method: 'GET',
+    credentials: 'include',
+    cache: 'no-cache',
+    mode: 'cors',
+  })
+
+  const json = await response.json()
+
+  return json
+}

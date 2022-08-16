@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { fetchSignInPost } from '../queries'
-import { constSelector, useRecoilValue, useSetRecoilState } from 'recoil'
+import { fetchSignInPost, fetchSignInGet } from '../queries'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { isLoginAtom } from '../recoil'
 import { useNavigate } from 'react-router-dom'
 import { user, User } from '../types'
@@ -23,22 +23,12 @@ const SignIn = () => {
   })
 
   useEffect(() => {
-    const fetchSignInGet = async () => {
-      const response = await fetch('http://localhost:5252/api/v1/auth/signin', {
-        method: 'GET',
-        credentials: 'include',
-        cache: 'no-cache',
-        mode: 'cors',
-      })
-
-      const json = await response.json()
-
+    fetchSignInGet().then((json) => {
       if (json.isSignIned) {
         setIsLogin(true)
         navigate('/')
       }
-    }
-    fetchSignInGet()
+    })
   })
 
   useEffect(() => {
