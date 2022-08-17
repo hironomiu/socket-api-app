@@ -33,30 +33,28 @@ const Main = () => {
     })
   }, [])
 
-  const handleClick = async () => {
-    const response = await fetch('http://localhost:5252/api/v1/auth/signin', {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'include',
-    })
-    const json = await response.json()
-    console.log(json)
-  }
   return (
-    <main className="flex">
-      <button onClick={handleClick}>API GET SignIn</button>
+    <main className="flex flex-col">
       <form
         onSubmit={handleSubmit(async (message: Message) => {
           console.log('hoge:', message)
           setMessages((prev) => [...prev, message.message])
         })}
       >
-        <input type="text" {...register('message')} />
+        <input
+          type="text"
+          {...register('message')}
+          className="h-12 mx-2 px-2 text-xl border-2"
+          placeholder="text"
+        />
         {errors.message?.message && <p>{errors.message?.message}</p>}
-        <input type="submit" value="Send" />
+        <input
+          type="submit"
+          value="Send"
+          className="h-12 w-40 bg-blue-600 rounded-md mx-4 text-xl text-white"
+        />
       </form>
-      <div className="flex flex-col">
+      <div className="flex flex-col mx-4 my-10">
         {messages.map((message, index) => (
           <div key={index}>{message}</div>
         ))}
