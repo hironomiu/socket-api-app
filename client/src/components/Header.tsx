@@ -32,7 +32,9 @@ const Header = () => {
               <li>hoge</li>
               <li>fuga</li>
               <li>piyo</li>
-              <li onClick={handleClickSignOut}>SignOut</li>
+              <li onClick={handleClickSignOut} className="hover:cursor-pointer">
+                SignOut
+              </li>
             </ul>
           </nav>
           <div className="block md:hidden">
@@ -54,7 +56,7 @@ const Header = () => {
               <li className="text-xl my-2">hoge</li>
               <li className="text-xl my-2">fuga</li>
               <li className="text-xl my-2">piyo</li>
-              <li className="text-xl my-2">SignOut</li>
+              <li className="text-xl my-2 hover:cursor-pointer">SignOut</li>
             </ul>
           </div>
         </>
