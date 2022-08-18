@@ -6,7 +6,7 @@ const auth = Router()
 const prisma = new PrismaClient()
 
 auth.get('/signin', (req: any, res: any) => {
-  console.log('session', req.session)
+  // console.log('session', req.session)
   if (req.session.userId) {
     res.json({ isSignIned: true, message: 'signined' })
   } else {

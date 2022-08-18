@@ -29,7 +29,9 @@ const Main = () => {
 
   useEffect(() => {
     socket.on('message', (msg) => {
-      console.log(msg)
+      console.log('useEffect:', JSON.parse(msg))
+      const data = JSON.parse(msg)
+      setMessages((prev) => [data.message, ...prev])
     })
   }, [])
 
@@ -38,7 +40,8 @@ const Main = () => {
       <form
         onSubmit={handleSubmit(async (message: Message) => {
           console.log('hoge:', message)
-          setMessages((prev) => [...prev, message.message])
+          socket.emit('message', message.message)
+          // setMessages((prev) => [message.message, ...prev])
         })}
       >
         <input
