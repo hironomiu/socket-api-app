@@ -15,11 +15,11 @@ const Main = () => {
   const navigate = useNavigate()
   const isLogin = useRecoilValue(isLoginAtom)
   const [messages, setMessages] = useState<string[]>([])
-
+  const [isDisableds, setIsDisableds] = useState(true)
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Message>({
     resolver: zodResolver(message),
   })
@@ -35,26 +35,31 @@ const Main = () => {
     })
   }, [])
 
+  console.log('isSubmitting:', isSubmitting)
+
   return (
     <main className="flex flex-col">
       <form
         onSubmit={handleSubmit(async (message: Message) => {
           console.log('hoge:', message)
           socket.emit('message', message.message)
-          // setMessages((prev) => [message.message, ...prev])
         })}
+        className="flex"
       >
-        <input
-          type="text"
-          {...register('message')}
-          className="h-12 mx-2 px-2 text-xl border-2"
-          placeholder="text"
-        />
-        {errors.message?.message && <p>{errors.message?.message}</p>}
+        <div>
+          <input
+            type="text"
+            {...register('message')}
+            className="h-12 mx-2 px-2 text-xl border-2"
+            placeholder="text"
+          />
+          {errors.message?.message && <p>{errors.message?.message}</p>}
+        </div>
         <input
           type="submit"
           value="Send"
-          className="h-12 w-40 bg-blue-600 rounded-md mx-4 text-xl text-white"
+          // disabled={!!errors}
+          className="h-12 w-40 bg-blue-600 rounded-md mx-4 text-xl text-white hover:cursor-pointer disabled:bg-gray-500"
         />
       </form>
       <div className="flex flex-col mx-4 my-10">
