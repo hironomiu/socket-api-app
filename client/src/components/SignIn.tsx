@@ -75,7 +75,7 @@ const SignIn = () => {
           <input
             type="submit"
             value="SignIn"
-            className="bg-blue-300 w-40 text-2xl rounded-md h-12"
+            className="bg-blue-300 w-40 text-2xl rounded-md h-12 hover:cursor-pointer"
           />
         </div>
       </form>

@@ -15,13 +15,13 @@ const Main = () => {
   const navigate = useNavigate()
   const isLogin = useRecoilValue(isLoginAtom)
   const [messages, setMessages] = useState<string[]>([])
-  const [isDisableds, setIsDisableds] = useState(true)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isDirty, isValid },
   } = useForm<Message>({
     resolver: zodResolver(message),
+    mode: 'onChange',
   })
   useEffect(() => {
     if (!isLogin) navigate('/signin')
@@ -35,13 +35,12 @@ const Main = () => {
     })
   }, [])
 
-  console.log('isSubmitting:', isSubmitting)
-
   return (
     <main className="flex flex-col">
       <form
         onSubmit={handleSubmit(async (message: Message) => {
           console.log('hoge:', message)
+
           socket.emit('message', message.message)
         })}
         className="flex"
@@ -58,7 +57,7 @@ const Main = () => {
         <input
           type="submit"
           value="Send"
-          // disabled={!!errors}
+          disabled={!isValid}
           className="h-12 w-40 bg-blue-600 rounded-md mx-4 text-xl text-white hover:cursor-pointer disabled:bg-gray-500"
         />
       </form>
