@@ -17,9 +17,10 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<User>({
     resolver: zodResolver(user),
+    mode: 'onChange',
   })
 
   useEffect(() => {
@@ -75,7 +76,8 @@ const SignIn = () => {
           <input
             type="submit"
             value="SignIn"
-            className="bg-blue-300 w-40 text-2xl rounded-md h-12 hover:cursor-pointer"
+            className="bg-blue-300 w-40 text-2xl rounded-md h-12 hover:cursor-pointer disabled:bg-gray-500"
+            disabled={!isValid}
           />
         </div>
       </form>
