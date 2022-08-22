@@ -18,7 +18,7 @@ const Main = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = useForm<Message>({
     resolver: zodResolver(message),
     mode: 'onChange',
