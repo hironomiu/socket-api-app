@@ -56,16 +56,21 @@ export const setUp = () => {
     cookie: true,
   })
 
-  const wrap = (middleware: any) => (socket: any, next: any) =>
-    middleware(socket.request, {}, next)
+  const wrap = (middleware: any) => (socket: any, next: any) => {
+    // console.log(socket.request)
+    return middleware(socket.request, {}, next)
+  }
 
-  io.use(wrap(cookieParser()))
+  // io.use(wrap(cookieParser()))
 
   io.use(wrap(sessionMiddleware))
 
   io.use((socket: any, next: any) => {
+    console.log('io use')
     const session = socket.request.session
-    console.log(socket.request.session.id)
+    console.log(socket.request.session)
+    // console.log('hoge:', socket.response)
+    // console.log('socket cookie:', socket.response.cookie)
     if (session && session.id) {
       next()
     } else {
@@ -78,6 +83,7 @@ export const setUp = () => {
     console.log('session:', socket.request.session)
     socket.on('message', (msg: any) => {
       console.log('session:', socket.request.session.id)
+      // console.log('socket cookie:', socket.response.cookie)
 
       console.log(msg)
       io.emit('message', JSON.stringify({ message: msg }))

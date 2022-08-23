@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 
 auth.get('/signin', (req: any, res: any) => {
   console.log('GET signin session', req.session.id)
+  // console.log('cookie:', res.cookie())
   if (req.session.userId) {
     res.json({ isSignIned: true, message: 'signined' })
   } else {
