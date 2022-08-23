@@ -27,6 +27,16 @@ const Main = () => {
     if (!isLogin) navigate('/signin')
   }, [isLogin, navigate])
 
+  // useEffect(() => {
+  //   socket.on('open', () => {
+  //     console.log('open')
+  //     socket.io.engine.transport.on('pollComplete', () => {
+  //       const request = socket.io.engine.transport.pollXhr.xhr
+  //       console.log('gogog:', request)
+  //     })
+  //   })
+  // }, [])
+
   useEffect(() => {
     socket.on('message', (msg) => {
       console.log('useEffect:', JSON.parse(msg))
