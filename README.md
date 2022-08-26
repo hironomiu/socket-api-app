@@ -62,3 +62,7 @@ mkdir src/api/v1
 npx -y prisma
 npx prisma init
 ```
+
+```
+npm install --save-dev swagger-ui-express swagger-jsdoc @types/swagger-ui-express @types/swagger-jsdoc
+```

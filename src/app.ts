@@ -7,6 +7,24 @@ import auth from './api/v1/auth'
 // import * as expressSession from 'express-session'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      version: '1.0.0',
+      title: 'Server API',
+      description: 'Server API',
+      contact: {
+        name: 'Amazing Dev',
+      },
+      servers: ['http://localhost:5252'],
+    },
+  },
+  apis: ['app.ts'],
+  security: [{ auth: [] }],
+}
 
 export const setUp = () => {
   const app = express()
@@ -35,6 +53,18 @@ export const setUp = () => {
 
   app.use(sessionMiddleware)
 
+  const swaggerDocs = swaggerJSDoc(swaggerOptions)
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+  /**
+   * @swagger
+   * /:
+   *  get:
+   *    description: Use to request all customers
+   *    responses:
+   *      '200':
+   *        description: A successful response
+   */
   app.get('/', (req, res) => {
     res.json('/')
   })

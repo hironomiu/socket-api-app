@@ -5,6 +5,15 @@ import bcrypt from 'bcrypt'
 const auth = Router()
 const prisma = new PrismaClient()
 
+/**
+ * @swagger
+ * /signin:
+ *  get:
+ *    description: Use to request all customers
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 auth.get('/signin', (req: any, res: any) => {
   console.log('GET signin session', req.session.id)
   // console.log('cookie:', res.cookie())
