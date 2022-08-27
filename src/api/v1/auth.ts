@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 
 /**
  * @swagger
- * /signin:
+ * /api/v1/auth/signin:
  *  get:
  *    description: Use to request all customers
  *    responses:
