@@ -22,7 +22,7 @@ const swaggerOptions = {
       servers: ['http://localhost:5252'],
     },
   },
-  apis: ['app.ts'],
+  apis: ['./src/app.ts', './src/api/v1/*'],
   security: [{ auth: [] }],
 }
 
