@@ -59,6 +59,7 @@ const SignIn = () => {
             placeholder="email"
             {...register('email')}
             className="border text-2xl px-2 py-2"
+            data-testid="email"
           />
           {errors.email?.message && <p>{errors.email?.message}</p>}
         </div>
@@ -68,6 +69,7 @@ const SignIn = () => {
             placeholder="password"
             {...register('password')}
             className="border text-2xl px-2 py-2"
+            data-testid="password"
           />
           {errors.password?.message && <p>{errors.password?.message}</p>}
         </div>
@@ -78,6 +80,7 @@ const SignIn = () => {
             value="SignIn"
             className="bg-blue-300 w-40 text-2xl rounded-md h-12 hover:cursor-pointer disabled:bg-gray-500"
             disabled={!isValid}
+            data-testid="submit-button"
           />
         </div>
       </form>
