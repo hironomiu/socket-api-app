@@ -24,7 +24,17 @@ auth.get('/signin', (req: any, res: any) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/v1/auth/signin:
+ *  post:
+ *    description: Use to request all customers
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 auth.post('/signin', async (req: any, res) => {
+  // TODO: req.bodyでバリデーション
   const user = await prisma.users.findUnique({
     where: {
       email: req.body.email,
