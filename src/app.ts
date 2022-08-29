@@ -56,19 +56,6 @@ export const setUp = () => {
   const swaggerDocs = swaggerJSDoc(swaggerOptions)
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-  /**
-   * @swagger
-   * /:
-   *  get:
-   *    description: Use to request all customers
-   *    responses:
-   *      '200':
-   *        description: A successful response
-   */
-  app.get('/', (req, res) => {
-    res.json('/')
-  })
-
   app.use(
     '/api/v1',
     (() => {
@@ -99,8 +86,6 @@ export const setUp = () => {
     console.log('io use')
     const session = socket.request.session
     console.log(socket.request.session)
-    // console.log('hoge:', socket.response)
-    // console.log('socket cookie:', socket.response.cookie)
     if (session && session.id) {
       next()
     } else {
