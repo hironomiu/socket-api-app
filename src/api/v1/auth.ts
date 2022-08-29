@@ -65,6 +65,15 @@ auth.post('/signin', async (req: any, res) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/v1/auth/signout:
+ *  post:
+ *    description: Use to request all customers
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 auth.post('/signout', (req, res) => {
   req.session.destroy((err) => {
     console.log('err:', err)
