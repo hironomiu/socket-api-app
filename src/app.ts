@@ -32,6 +32,8 @@ export const setUp = () => {
 
   app.use(express.json())
 
+  app.disable('x-powered-by')
+
   app.use(
     cors({
       origin: process.env.CORS_ORIGINS?.split(' '),

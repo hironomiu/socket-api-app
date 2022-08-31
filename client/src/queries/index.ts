@@ -25,6 +25,7 @@ export const fetchSignInGet = async () => {
     mode: 'cors',
   })
 
+  console.log(response.headers)
   const json = await response.json()
 
   return json

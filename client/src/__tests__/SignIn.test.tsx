@@ -30,9 +30,7 @@ describe('SignIn', () => {
     waitFor(() => {
       userEvent.type(screen.getByTestId('email'), 'hanako@example.com')
     })
-    await waitFor(() => {
-      screen.getByTestId('email')
-    })
+    screen.getByTestId('email')
     expect(screen.getByTestId('email')).toHaveValue('hanako@example.com')
   })
 })
