@@ -27,7 +27,9 @@ describe('SignIn', () => {
       </QueryClientProvider>
     )
     expect(screen.getByTestId('email')).toHaveValue('')
+    // eslint-disable-next-line testing-library/await-async-utils
     waitFor(() => {
+      // eslint-disable-next-line testing-library/no-wait-for-side-effects
       userEvent.type(screen.getByTestId('email'), 'hanako@example.com')
     })
     screen.getByTestId('email')
