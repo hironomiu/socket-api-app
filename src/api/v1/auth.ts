@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import { validate, user } from '../../middlewares/zod'
 
 const auth = Router()
 const prisma = new PrismaClient()
@@ -33,7 +34,7 @@ auth.get('/signin', (req: any, res: any) => {
  *      '200':
  *        description: A successful response
  */
-auth.post('/signin', async (req: any, res) => {
+auth.post('/signin', validate(user), async (req: any, res) => {
   // TODO: req.bodyでバリデーション
   const user = await prisma.users.findUnique({
     where: {

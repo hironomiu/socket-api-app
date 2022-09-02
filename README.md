@@ -74,3 +74,9 @@ npm install --save-dev swagger-ui-express swagger-jsdoc @types/swagger-ui-expres
 ```
 npm install http-graceful-shutdown
 ```
+
+### zod
+
+```
+npm install zod
+```
