@@ -35,7 +35,6 @@ auth.get('/signin', (req: any, res: any) => {
  *        description: A successful response
  */
 auth.post('/signin', validate(user), async (req: any, res) => {
-  // TODO: req.bodyでバリデーション
   const user = await prisma.users.findUnique({
     where: {
       email: req.body.email,
