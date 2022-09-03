@@ -3,8 +3,8 @@ import { Request, Response } from 'express'
 
 export const user = z.object({
   body: z.object({
-    email: z.string().email(),
-    password: z.string().min(8),
+    email: z.string().email({ message: 'Email address' }),
+    password: z.string().min(8, { message: 'Required' }),
   }),
 })
 
