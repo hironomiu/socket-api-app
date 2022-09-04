@@ -80,3 +80,10 @@ npm install http-graceful-shutdown
 ```
 npm install zod
 ```
+
+### log4js
+
+```
+npm install log4js
+npm install --save-dev @types/log4js
+```

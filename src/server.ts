@@ -1,5 +1,6 @@
 import { setUp } from './app'
 import gracefulShutdown from 'http-graceful-shutdown'
+import logger from './middlewares/log/logger'
 import 'dotenv/config'
 
 const server = setUp()
@@ -7,7 +8,7 @@ const server = setUp()
 const LISTEN_PORT = Number(process.env.LISTEN_PORT) | 5252
 
 const s = server.listen(LISTEN_PORT, () => {
-  console.log(`server listening *:${LISTEN_PORT}`)
+  logger.console.info(`server listening *:${LISTEN_PORT}`)
 })
 
 gracefulShutdown(s, {
@@ -21,6 +22,6 @@ gracefulShutdown(s, {
     })
   },
   finally: () => {
-    console.log('shutdowned')
+    logger.console.info('shutdowned')
   },
 })
