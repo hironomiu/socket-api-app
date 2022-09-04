@@ -9,6 +9,7 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
+import logger from './middlewares/log/logger'
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -76,7 +77,6 @@ export const setUp = () => {
   })
 
   const wrap = (middleware: any) => (socket: any, next: any) => {
-    // console.log(socket.request)
     return middleware(socket.request, {}, next)
   }
 
@@ -85,24 +85,19 @@ export const setUp = () => {
   io.use(wrap(sessionMiddleware))
 
   io.use((socket: any, next: any) => {
-    console.log('io use')
     const session = socket.request.session
-    console.log(socket.request.session)
     if (session && session.id) {
       next()
+      // TODO: 上のnextが実行されるとelseなしで下のnextは問題ないか
     } else {
-      console.log('errorrrrrrr')
       next(new Error('unauthorized'))
     }
   })
 
   io.on('connection', (socket: any) => {
-    console.log('session:', socket.request.session)
+    logger.console.info('session:', socket.request.session)
     socket.on('message', (msg: any) => {
-      console.log('session:', socket.request.session.id)
-      // console.log('socket cookie:', socket.response.cookie)
-
-      console.log(msg)
+      logger.console.info('session:', socket.request.session.id)
       io.emit('message', JSON.stringify({ message: msg }))
     })
   })
