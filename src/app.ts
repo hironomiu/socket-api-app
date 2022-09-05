@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import logger from './middlewares/log/logger'
+import accessLogger from './middlewares/log/accessLogger'
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -55,6 +56,9 @@ export const setUp = () => {
   })
 
   app.use(sessionMiddleware)
+
+  // TODO: optionsを渡す
+  app.use(accessLogger({}))
 
   const swaggerDocs = swaggerJSDoc(swaggerOptions)
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
