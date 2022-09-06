@@ -1,26 +1,18 @@
 import { useState } from 'react'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { isLoginAtom } from '../recoil'
+import SignOutModal from './modal/SignOutModal'
 
 const Header = () => {
   const isLogin = useRecoilValue(isLoginAtom)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const setIsLogin = useSetRecoilState(isLoginAtom)
+  const [isModalOn, setIsModalOn] = useState(false)
   const handleClick = () => {
     setIsMenuOpen((prev) => !prev)
   }
   const handleClickSignOut = async () => {
-    const response = await fetch('http://localhost:5252/api/v1/auth/signout', {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
-      cache: 'no-cache',
-      redirect: 'follow',
-    })
-    const json = await response.json()
-    console.log(json)
-    setIsLogin(false)
+    setIsModalOn(true)
   }
   return (
     <header className=" h-16 flex justify-between items-center mx-4">
@@ -59,6 +51,8 @@ const Header = () => {
               <li className="text-xl my-2 hover:cursor-pointer">SignOut</li>
             </ul>
           </div>
+          {/* TODO: スマホ時のモーダルデザイン */}
+          {isModalOn ? <SignOutModal setIsModalOn={setIsModalOn} /> : null}
         </>
       ) : (
         ''
